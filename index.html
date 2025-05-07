@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhijith U - Digital Card</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #2b2b2b);
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 10%;
+      object-fit: cover;
+      border: 3px solid #999;
+      margin-bottom: 20px;
+    }
+
+    .proF {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #999;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 1.6em;
+      margin: 10px 0 5px;
+      color: #e0e0e0;
+    }
+
+    .title {
+      font-size: 1em;
+      font-weight: 300;
+      color: #b0b0b0;
+    }
+
+    .company {
+      font-weight: bold;
+      margin: 10px 0;
+      color: #ffcc00;
+    }
+
+    .icons {
+      margin: 20px 0;
+    }
+
+    .icons a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #f5f5f5;
+      font-size: 1.5em;
+    }
+
+    .section {
+      background: #2b2b2b;
+      color: #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+
+    .section p {
+      margin: 5px 0;
+      font-size: 0.95em;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.8em;
+      color: #777;
+    }
+
+    .footer a {
+      color: #999;
+      text-decoration: underline;
+    }
+
+    .native-share-button {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  background: #444;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+  border: none;
+}
+
+
+    .qr-button, .download-button {
+      position: absolute;
+      bottom: 15px;
+      background: #444;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      cursor: pointer;
+      font-size: 1.2em;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+    }
+
+    .download-button {
+      right: 60px;
+    }
+
+    .qr-button {
+      right: 15px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5f5;
+      color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .popup img {
+      width: 150px;
+      height: 150px;
+      margin-top: 10px;
+    }
+
+    .contact-save-button {
+  position: absolute;
+  top: 65px;
+  right: 1px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  font-size: 1.2em;
+  text-decoration: none;
+  z-index: 10;
+  background: #444;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+/* Optional: Adjust size slightly on small screens if needed */
+@media (max-width: 500px) {
+  .contact-save-button {
+    width: 36px;
+    height: 36px;
+    font-size: 1em;
+  }
+}
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="qrPopup">
+    <h2>Scan this QR code</h2>
+    <img src="co.jpg" alt="Abhijith U" class="avatar" />
+    <p><button onclick="closePopup()">Close</button></p>
+  </div>
+  <div class="card" id="card">
+    <img src="pro.jpeg" alt="Abhijith U" class="proF" />
+    <h1>ABHIJITH U</h1>
+    <p class="title">Administrator</p>
+    <div class="company">Salem Jaber Alhassan and Sons</div>
+
+    <div class="icons">
+      <a href="tel:+97455719844" aria-label="Call">
+        <img src="te.svg" alt="Phone" width="28" height="28" />
+      </a>
+      <a href="mailto:abhiocrdoha@gmail.com" aria-label="Email">
+        <img src="gm.svg" alt="Email" width="28" height="28" />
+      </a>
+      <a href="https://wa.me/97455719844" aria-label="WhatsApp">
+        <img src="wh.svg" alt="WhatsApp" width="28" height="28" />
+      </a>
+      <a href="contact.vcf" download class="contact-save-button" title="Save Contact">💾</a>
+
+
+    </div>
+
+    <div class="section">
+      <h2>About Me</h2>
+      <p>The best way to predict the future is to create it.</p>
+    </div>
+
+    <div class="section">
+      <h2>Contact Us</h2>
+      <p><strong>Email</strong><br>abhiocrdoha@gmail.com</p>
+      <p><strong>Contact Number</strong><br>+97455719844</p>
+    </div>
+
+    <div class="footer">
+      <a href="#">Get your own Smart Business Card </a>
+    </div>
+
+    <div class="download-button" onclick="downloadCard()">⬇️</div>
+    <div class="qr-button" onclick="showPopup()">🔳</div>
+    <button class="native-share-button" onclick="shareThisPage()">➥</button>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById('qrPopup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+
+    }
+
+    function closePopup() {
+      document.getElementById('qrPopup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    function downloadCard() {
+  const link = document.createElement('a');
+  link.href = 'vcard.png'; // Path to the existing image in the same folder
+  link.download = 'vcard.png'; // Name of the downloaded file
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+    function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      text: "Check out this digital card!",
+      url: window.location.href
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.error('Error sharing:', error));
+  } else {
+    alert("Sharing not supported on this device/browser.");
+  }
+}
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
